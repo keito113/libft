@@ -6,7 +6,7 @@
 #    By: keitabe <keitabe@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/25 15:27:53 by keitabe           #+#    #+#              #
-#    Updated: 2025/05/07 13:03:49 by keitabe          ###   ########.fr        #
+#    Updated: 2025/05/15 10:00:35 by keitabe          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,22 +63,26 @@ BONUS_OBJ_FILES := $(BONUS_OBJ_FILES:.c=.o)
 
 CFLAGS    := -Wall -Wextra -Werror
 
-.PHONY: all clean fclean re bonus
-
 all: $(NAME)
 
-$(NAME): $(OBJ_FILES) $(BONUS_OBJ_FILES)
-	ar rcs $(NAME) $(OBJ_FILES) $(BONUS_OBJ_FILES)
+$(NAME): $(OBJ_FILES)
+	ar rcs $(NAME) $(OBJ_FILES)
 
-bonus: $(NAME)
+bonus: .bonus_stamp
+
+.bonus_stamp: $(OBJ_FILES) $(BONUS_OBJ_FILES)
+	ar rcs $(NAME) $(OBJ_FILES) $(BONUS_OBJ_FILES)
+	@touch .bonus_stamp
 
 %.o: %.c
 	cc $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ_FILES) $(BONUS_OBJ_FILES)
+	rm -f $(OBJ_FILES) $(BONUS_OBJ_FILES) .bonus_stamp
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re bonus

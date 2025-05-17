@@ -6,27 +6,26 @@
 /*   By: keitabe <keitabe@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 16:55:16 by keitabe           #+#    #+#             */
-/*   Updated: 2025/05/03 11:34:21 by keitabe          ###   ########.fr       */
+/*   Updated: 2025/05/13 11:53:31 by keitabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t count, size_t size)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	char	*dest;
-	size_t	i;
+	void	*ptr;
+	size_t	all;
 
-	i = 0;
-	dest = malloc(size * count);
-	if (!dest)
+	all = nmemb * size;
+	if (size && all / size != nmemb)
 		return (NULL);
-	while (i < (size * count))
-	{
-		dest[i] = 0;
-		i++;
-	}
-	return ((void *)dest);
+	if (!nmemb)
+		return (malloc(0));
+	ptr = malloc(all);
+	if (ptr)
+		ft_bzero(ptr, all);
+	return (ptr);
 }
 
 // #include "libft.h"

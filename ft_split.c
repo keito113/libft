@@ -6,7 +6,7 @@
 /*   By: keitabe <keitabe@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 15:20:16 by keitabe           #+#    #+#             */
-/*   Updated: 2025/05/01 17:21:01 by keitabe          ###   ########.fr       */
+/*   Updated: 2025/05/17 10:01:36 by keitabe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ char	**ft_split(char const *s, char c)
 	{
 		while (*s && *s == c)
 			s++;
-		len = word_len(s, c);
 		result[i] = malloc((len = word_len(s, c)) + 1);
 		if (!result[i])
 			return (free_all(result, i), NULL);
